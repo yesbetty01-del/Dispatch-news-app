@@ -19,6 +19,8 @@ export const lightColors = {
     // UI Elements
     tagBackground: '#eeeae3',     // Background for category chips and topic tags
     border: 'rgba(0, 0, 0, 0.08)', // Standard hairline dividers and card outlines
+
+    statusBarStyle: 'dark',
 };
   
 export const darkColors = {
@@ -42,6 +44,8 @@ export const darkColors = {
     // UI Elements
     tagBackground: '#2c2c2e',     // Dark gray background for tags and category chips
     border: 'rgba(255, 255, 255, 0.08)', // Light-alpha dividers for dark mode depth
+
+    statusBarStyle: 'light',
 };
 
 export const themes = {

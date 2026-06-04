@@ -2,9 +2,32 @@ import { Tabs } from 'expo-router';
 import { Feather } from '@expo/vector-icons';
 import { SystemBars } from 'react-native-edge-to-edge';
 import useTheme from '../../store/useTheme';
+import {
+    useFonts,
+    Syne_400Regular,
+    Syne_500Medium,
+    Syne_600SemiBold,
+    Syne_700Bold,
+    Syne_800ExtraBold,
+} from "@expo-google-fonts/syne";
+
 export default function Layout() {
     const { colors } = useTheme();
+
+    const [fontsLoaded] = useFonts({
+        Syne_400Regular,
+        Syne_500Medium,
+        Syne_600SemiBold,
+        Syne_700Bold,
+        Syne_800ExtraBold,
+    });
+
+    if (!fontsLoaded) {
+        return null;
+    }
     return(
+        <>
+        <SystemBars style={colors.statusBarStyle} />
         <Tabs screenOptions={{
             tabBarStyle:{
                 backgroundColor: colors.containerLowest,
@@ -58,5 +81,6 @@ export default function Layout() {
             }}
             />
         </Tabs>
+        </>
     )
 }

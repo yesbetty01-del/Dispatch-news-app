@@ -3,7 +3,9 @@ import { StyleSheet, View, Button } from 'react-native';
 import useTheme from '../../store/useTheme';
 
 const Profile = () => {
-    const {toggleTheme} = useTheme();
+    const {toggleTheme, colors} = useTheme();
+    const styles = createStyles(colors);
+    
     return (
         <View style={styles.container}>
             <Button title='change theme' onPress={toggleTheme} />
@@ -12,11 +14,12 @@ const Profile = () => {
     );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors) => StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: colors.surface,
     }
 })
 
