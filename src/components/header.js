@@ -18,7 +18,6 @@ const createStyles = (colors, fSize, spacing) => StyleSheet.create({
         color: colors.inkPrimary,
         fontSize: fSize.sectionTitle,
         fontFamily: 'Syne_800ExtraBold',
-        marginLeft: spacing.lg
     }
 });
 

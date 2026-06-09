@@ -19,7 +19,6 @@ const createStyles = (colors, fSize, spacing) => StyleSheet.create({
     greetingText: {
         color: colors.inkMuted,
         fontSize: fSize.secondary,
-        marginLeft: spacing.lg
     }
 });
 

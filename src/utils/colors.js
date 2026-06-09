@@ -25,11 +25,11 @@ export const lightColors = {
   
 export const darkColors = {
     // Surface & Layout
-    surface: '#131314',           // Primary app background (Nocturnal Black)
-    surfaceDim: '#131314',        // Deepest layer background
+    surface: '#0D0E10',           // Primary app background (Nocturnal Black)
+    surfaceDim: '#1A1A1C',        // Deepest layer background
     surfaceBright: '#39393a',     // Active/Hover states on dark surfaces
     containerLowest: '#0e0e0f',   // Darkest card interiors
-    containerLow: '#1c1b1c',      // Secondary surface containers/settings groups
+    containerLow: '#1B1C1E',      // Secondary surface containers/settings groups
 
     // Typography & Content
     inkPrimary: '#ffffff',        // High-contrast headings (Pure White)
