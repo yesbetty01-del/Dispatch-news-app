@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Greeting from '../../components/greeting';
 import Header from '../../components/header';
 import SearchInput from '../../components/searchInput';
+import Chips from '../../components/chips';
 
 const Index = () => {
     const { colors, spacing } = useTheme();
@@ -17,6 +18,12 @@ const Index = () => {
             <Header header={'Dispatch'} />
             {/* search input */}
             <SearchInput value={searchText} onChangeText={setSearchText} />
+            
+            {/* chips */}
+            <View style={{marginHorizontal: -spacing.xl}}>
+                <Chips />
+            </View>
+            
         </SafeAreaView>
     );
 }
