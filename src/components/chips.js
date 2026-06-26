@@ -19,7 +19,6 @@ const Chips = () => {
             ]}
             contentContainerStyle={{
                 alignItems: 'center',
-                paddingHorizontal: spacing.xl,
                 gap: spacing.sm
             }}
         >
