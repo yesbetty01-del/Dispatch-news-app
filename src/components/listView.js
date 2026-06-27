@@ -3,10 +3,40 @@ import { StyleSheet, View, Image, Pressable, Text, Alert } from 'react-native';
 import useTheme from '../store/useTheme';
 import Tag from './tag';
 import Caption from './caption';
-import Icon from './icon';
+import { Ionicons } from '@expo/vector-icons';
+import useBookmark from '../store/useBookmark';
+import { getItems, setItems } from "../utils/storage";
 
 const ListView = ({ imageUrl,tagLabel, title, time }) => {
     const { colors, fSize, spacing } = useTheme();
+    const { addBookmark, removeBookmark } = useBookmark();
+    const [ isBookmarked, setIsBookmarked ] = useState(false);
+
+    useEffect(() => {
+        const chechBookmark = async () => {
+            const bookmarks = await getItems("bookmarks");
+            if(bookmarks) {
+                const parsedBookmarks = JSON.parse(bookmarks);
+                const isBookmarked = parsedBookmarks.some(
+                    (article) => article.title === title
+                );
+                setIsBookmarked(isBookmarked);
+            }
+            else {
+                setIsBookmarked(false);
+            }
+        };
+        chechBookmark();
+    }, [title]);
+
+    const handleBookmarkPress = () => {
+        if (isBookmarked) {
+            removeBookmark(title);
+        } else {
+            addBookmark(title);
+        }
+        setIsBookmarked(!isBookmarked);
+    }
 
     return (
         <View
@@ -46,7 +76,7 @@ const ListView = ({ imageUrl,tagLabel, title, time }) => {
                     >
                         {title}
                     </Text>
-                    <Icon name= 'bookmark' />
+                    <Ionicons name= { isBookmarked? 'bookmark' : 'bookmark-outline'} size={22} color={ isBookmarked? colors.accentRed : colors.inkSecondary} onPress={handleBookmarkPress} />
                 </View>
                 
                 <View style={styles.footer}>

@@ -18,3 +18,10 @@ export const getItems = async (key) => {
         return null;
     }
 };
+export const removeItems = async (key) => {
+    try {
+        await AsyncStorage.removeItem(key);
+    } catch (error) {
+        console.error("Error removing item from AsyncStorage:", error);
+    }
+}
