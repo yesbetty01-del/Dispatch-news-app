@@ -18,7 +18,7 @@ const ListView = ({ imageUrl,tagLabel, title, time }) => {
             if(bookmarks) {
                 const parsedBookmarks = JSON.parse(bookmarks);
                 const isBookmarked = parsedBookmarks.some(
-                    (article) => article.title === title
+                    (articleTitle) => articleTitle === title
                 );
                 setIsBookmarked(isBookmarked);
             }
