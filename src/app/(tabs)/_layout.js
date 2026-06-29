@@ -2,6 +2,8 @@ import { Tabs } from 'expo-router';
 import { Feather } from '@expo/vector-icons';
 import { SystemBars } from 'react-native-edge-to-edge';
 import useTheme from '../../store/useTheme';
+import { useEffect } from 'react';
+import { getItems } from '../../utils/storage';
 import {
     useFonts,
     Syne_400Regular,
@@ -12,7 +14,19 @@ import {
 } from "@expo-google-fonts/syne";
 
 export default function Layout() {
-    const { colors } = useTheme();
+    const { colors, setTheme } = useTheme();
+    useEffect(() => {
+        const LoadTheme = async () => {
+            const storedTheme = await getItems('themeMode');
+            if(storedTheme){
+                setTheme(storedTheme);
+            }
+            else{
+                return null;
+            }
+        }
+        LoadTheme();
+    }, []);
 
     const [fontsLoaded] = useFonts({
         Syne_400Regular,
