@@ -5,7 +5,7 @@ import useTheme from '../store/useTheme';
 
 const Chips = () => {
     const { colors, spacing } = useTheme();
-    const [selectedCategory, setSelectedCategory] = useState( Categories[0] );
+    const [selectedCategory, setSelectedCategory] = useState( Categories[0].categoryName );
 
     return (
         <ScrollView
@@ -25,12 +25,12 @@ const Chips = () => {
             {Categories.map((category, index) => (
                 <Pressable
                     key={index}
-                    onPress={() => setSelectedCategory(category)}
+                    onPress={() => setSelectedCategory(category.categoryName)}
                     style={[
                         styles.chip,
                         {
                             backgroundColor: 
-                                selectedCategory === category
+                                selectedCategory === category.categoryName
                                 ? colors.inkPrimary
                                 : colors.surfaceDim,
                             paddingHorizontal: 17,
@@ -41,12 +41,12 @@ const Chips = () => {
                     <Text
                         style={{
                             color:
-                                selectedCategory === category
+                                selectedCategory === category.categoryName
                                 ? colors.surface
                                 : colors.inkSecondary
                         }}
                     >
-                        {category}
+                        {category.categoryName}
                     </Text>
                 </Pressable>
             ))}

@@ -32,7 +32,7 @@ const Index = () => {
                 keyExtractor={(item) => item.id}
                 ListHeaderComponent={
                     <>
-                        <SearchInput value={searchText} onChangeText={setSearchText} />
+                        <SearchInput value={searchText} onChangeText={setSearchText} placeHolder={'Search topics, authors, or keywords'} />
                         <View style={{}}>
                             <Chips />
                             <Card Title={'The Singularity is Nearer'} />

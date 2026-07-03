@@ -3,7 +3,7 @@ import { StyleSheet, View, TextInput, Alert } from 'react-native';
 import Icon from './icon';
 import useTheme from '../store/useTheme';
 
-const SearchInput = ({value, onChangeText}) => {
+const SearchInput = ({value, onChangeText, placeHolder}) => {
     const {colors, fSize, spacing} = useTheme();
     const searchingTopic = (value) => {
         Alert.alert('Search', `You searched for ${value}`);
@@ -33,7 +33,7 @@ const SearchInput = ({value, onChangeText}) => {
                     ]}
                     value={value}
                     onChangeText={onChangeText}
-                    placeholder='Search topics, authors, or keywords'
+                    placeholder={placeHolder}
                     placeholderTextColor={colors.inkSecondary}
                 />
         </View>
