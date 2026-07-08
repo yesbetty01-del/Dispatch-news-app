@@ -1,5 +1,9 @@
 export const Categories = [
     {
+        id: 0,
+        categoryName: 'All',
+    },
+    {
         id: 1,
         categoryName: 'Trending',
         iconName: 'trending-up-outline',

@@ -40,7 +40,7 @@ const Index = () => {
                         </View>
                     </>
                 }
-                renderItem={({ item }) => (<ListView title={item.title} time={item.time} tagLabel={item.tagLabel} imageUrl={item.imageUrl} />)}
+                renderItem={({ item }) => (<ListView item={item} />)}
                 showsVerticalScrollIndicator={false}
             />
 

@@ -1,15 +1,50 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { useState, useEffect } from 'react';
+import { StyleSheet, View, Text, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useTheme from '../../store/useTheme';
 import Header from '../../components/header';
+import Chips from '../../components/chips';
+import ListView from '../../components/listView';
+import { getItems } from '../../utils/storage';
+import useBookmark from '../../store/useBookmark';
 
 const Saved = () => {
-    const { colors } = useTheme();
+    const { colors, spacing } = useTheme();
     const styles = createStyles(colors);
+    const articleLength = 2;
+    const { bookmarks, setBookmarks, removeBookmark, addBookmark} = useBookmark();
+
+    useEffect(() => {
+        const loadBookmarks = async () => {
+            const storedBookmarks = await getItems('bookmarks');
+            const parsedBookmarks = storedBookmarks ? JSON.parse(storedBookmarks) : [];
+            setBookmarks(parsedBookmarks);
+    };
+    loadBookmarks();
+}, [removeBookmark, addBookmark]);
+
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={[styles.container, {paddingHorizontal: spacing.xl}]}>
             <Header header={'Saved'} />
+            <Chips />
+            {
+                bookmarks.length === 0 && (
+                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                        <Text style={{color: colors.inkSecondary}}> No bookmarks found </Text>
+                    </View>
+                )
+            }
+            <FlatList
+                data={bookmarks}
+                keyExtractor={(item) => item.title}
+                renderItem={({item}) => {
+                    console.log(item);
+                    return (
+                    <ListView
+                        item={item}
+                    />
+                )}}
+            />
         </SafeAreaView>
     );
 }

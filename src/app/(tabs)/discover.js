@@ -18,7 +18,7 @@ const Discover = () => {
     const cardWidth = (availableWidth - spacing.md) / 2;
 
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
             <Header header={'Discover'} />
             <SearchInput
                 value={searchcaregory}
@@ -26,7 +26,7 @@ const Discover = () => {
                 placeHolder={"Search categories"}
             />
             <FlatList
-                data={Categories}
+                data={Categories.splice(1)}
                 keyExtractor={(item) => item.id}
                 numColumns={2}
                 contentContainerStyle={{ paddingTop: spacing.lg, gap: spacing.md }}

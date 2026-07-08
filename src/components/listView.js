@@ -7,7 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 import useBookmark from '../store/useBookmark';
 import { getItems, setItems } from "../utils/storage";
 
-const ListView = ({ imageUrl,tagLabel, title, time }) => {
+const ListView = ({ item }) => {
     const { colors, fSize, spacing } = useTheme();
     const { addBookmark, removeBookmark } = useBookmark();
     const [ isBookmarked, setIsBookmarked ] = useState(false);
@@ -18,7 +18,7 @@ const ListView = ({ imageUrl,tagLabel, title, time }) => {
             if(bookmarks) {
                 const parsedBookmarks = JSON.parse(bookmarks);
                 const isBookmarked = parsedBookmarks.some(
-                    (articleTitle) => articleTitle === title
+                    (articleTitle) => articleTitle === item.title
                 );
                 setIsBookmarked(isBookmarked);
             }
@@ -27,13 +27,13 @@ const ListView = ({ imageUrl,tagLabel, title, time }) => {
             }
         };
         chechBookmark();
-    }, [title]);
+    }, [item]);
 
     const handleBookmarkPress = () => {
         if (isBookmarked) {
-            removeBookmark(title);
+            removeBookmark(item);
         } else {
-            addBookmark(title);
+            addBookmark(item);
         }
         setIsBookmarked(!isBookmarked);
     }
@@ -58,7 +58,7 @@ const ListView = ({ imageUrl,tagLabel, title, time }) => {
                 }}
             >
                 <Image
-                    source={{uri: imageUrl}}
+                    source={{uri: item.imageUrl}}
                     style={[styles.imageCard, { borderRadius: spacing.md}]}
                 />
             </Pressable>
@@ -74,15 +74,15 @@ const ListView = ({ imageUrl,tagLabel, title, time }) => {
                             },
                         ]}
                     >
-                        {title}
+                        {item.title}
                     </Text>
                     <Ionicons name= { isBookmarked? 'bookmark' : 'bookmark-outline'} size={22} color={ isBookmarked? colors.accentRed : colors.inkSecondary} onPress={handleBookmarkPress} />
                 </View>
                 
                 <View style={styles.footer}>
-                    <Tag tagLabel={tagLabel} color={colors.inkSecondary} />
+                    <Tag tagLabel={item.tagLabel} color={colors.inkSecondary} />
                     <View style={{width: 3, height: 3, borderRadius: 1.5, backgroundColor: 'gray'}} />
-                    <Caption time={time} />                    
+                    <Caption time={item.time} />                    
                 </View>
             </View>
         </View>
