@@ -23,7 +23,7 @@ const Card = ({Title}) => {
                 >
                 
                     <View style={[styles.contents, {gap: spacing.md}]}>
-                        <Tag tagLabel={'Breaking - AI'} />    
+                        <Tag categoryName={'Breaking - AI'} />    
                         <HeroTitle Title={Title} />
                         <Caption time={'2h ago'} readTime={'5 min read'} />
                     </View>

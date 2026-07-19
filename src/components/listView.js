@@ -80,7 +80,7 @@ const ListView = ({ item }) => {
                 </View>
                 
                 <View style={styles.footer}>
-                    <Tag tagLabel={item.tagLabel} color={colors.inkSecondary} />
+                    <Tag categoryName={item.categoryName} color={colors.inkSecondary} />
                     <View style={{width: 3, height: 3, borderRadius: 1.5, backgroundColor: 'gray'}} />
                     <Caption time={item.time} />                    
                 </View>
