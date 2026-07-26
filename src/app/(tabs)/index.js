@@ -8,12 +8,16 @@ import SearchInput from '../../components/searchInput';
 import Chips from '../../components/chips';
 import Card from '../../components/card';
 import ListView from '../../components/listView';
-import { DATA } from '../../data/data';
+import DATA from '../../../convex/news';
+import { useQuery } from "convex/react";
+import { api } from "../../../convex/_generated/api";
 
 const Index = () => {
     const { colors, spacing, fSize } = useTheme();
     const styles = createStyles(colors, spacing, fSize);
     const [searchText, setSearchText] = useState('');
+    const articles = useQuery(api.articles.getArticles);
+
     const ListHeader = () => {
         return (
             <View style={styles.headerText}>
@@ -23,13 +27,23 @@ const Index = () => {
         )
     }
 
+    if(!articles) {
+        return(
+            <SafeAreaView style={styles.container} edge={["top", "left", "right"]} >
+                <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                    <Text>Loading...</Text>
+                </View>
+            </SafeAreaView>
+        )
+    }
+
     return (
         <SafeAreaView edges={['top', 'left', 'right']} style={styles.container}>
             <Greeting />
             <Header header={'Dispatch'} />
             <FlatList
-                data={DATA}
-                keyExtractor={(item) => item.id}
+                data={articles}
+                keyExtractor={(item) => item._id}
                 ListHeaderComponent={
                     <>
                         <SearchInput value={searchText} onChangeText={setSearchText} placeHolder={'Search topics, authors, or keywords'} />

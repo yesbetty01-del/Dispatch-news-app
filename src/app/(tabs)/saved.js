@@ -12,16 +12,11 @@ const Saved = () => {
     const { colors, spacing } = useTheme();
     const styles = createStyles(colors);
     const articleLength = 2;
-    const { bookmarks, setBookmarks, removeBookmark, addBookmark} = useBookmark();
+    const { bookmarks, setBookmarks, removeBookmark, addBookmark, loadBookmarks } = useBookmark();
 
     useEffect(() => {
-        const loadBookmarks = async () => {
-            const storedBookmarks = await getItems('bookmarks');
-            const parsedBookmarks = storedBookmarks ? JSON.parse(storedBookmarks) : [];
-            setBookmarks(parsedBookmarks);
-    };
-    loadBookmarks();
-}, [removeBookmark, addBookmark]);
+        loadBookmarks();
+}, [removeBookmark, addBookmark, loadBookmarks]);
 
     return (
         <SafeAreaView style={[styles.container, {paddingHorizontal: spacing.xl}]}>
@@ -36,9 +31,8 @@ const Saved = () => {
             }
             <FlatList
                 data={bookmarks}
-                keyExtractor={(item) => item.title}
+                keyExtractor={(item) => item._id}
                 renderItem={({item}) => {
-                    console.log(item);
                     return (
                     <ListView
                         item={item}

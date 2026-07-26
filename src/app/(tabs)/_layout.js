@@ -13,6 +13,9 @@ import {
     Syne_800ExtraBold,
 } from "@expo-google-fonts/syne";
 
+import { ConvexProvider, ConvexReactClient } from "convex/react";
+const convex = new ConvexReactClient(process.env.EXPO_PUBLIC_CONVEX_URL);
+
 export default function Layout() {
     const { colors, setTheme } = useTheme();
     useEffect(() => {
@@ -40,61 +43,61 @@ export default function Layout() {
         return null;
     }
     return(
-        <>
-        <SystemBars style={colors.statusBarStyle} />
-        <Tabs screenOptions={{
-            tabBarStyle:{
-                backgroundColor: colors.containerLowest,
-                //setOffset: 0,
-                borderTopWidth: 0,
-            },
-            tabBarActiveTintColor: colors.accentRed,
-            tabBarInactiveTintColor: colors.inkMuted,
-        }}>
-            <Tabs.Screen name='index' options={{
-                title: 'Home',
-                headerShown: false,
-                tabBarIcon: ({color, focused}) => (
-                <Feather name="home" size={24} color={color} />
-                ),
-            }}/>
-            
-            <Tabs.Screen name='discover' options={{
-                title: 'Discover',
-                headerShown: false,
-                tabBarIcon: ({color, focused}) => (
-                    <Feather name="compass" size={24} color={color} />
-                )
-            }}
-            />
+        <ConvexProvider client={convex}>
+            <SystemBars style={colors.statusBarStyle} />
+            <Tabs screenOptions={{
+                tabBarStyle:{
+                    backgroundColor: colors.containerLowest,
+                    //setOffset: 0,
+                    borderTopWidth: 0,
+                },
+                tabBarActiveTintColor: colors.accentRed,
+                tabBarInactiveTintColor: colors.inkMuted,
+            }}>
+                <Tabs.Screen name='index' options={{
+                    title: 'Home',
+                    headerShown: false,
+                    tabBarIcon: ({color, focused}) => (
+                    <Feather name="home" size={24} color={color} />
+                    ),
+                }}/>
+                
+                <Tabs.Screen name='discover' options={{
+                    title: 'Discover',
+                    headerShown: false,
+                    tabBarIcon: ({color, focused}) => (
+                        <Feather name="compass" size={24} color={color} />
+                    )
+                }}
+                />
 
-            <Tabs.Screen name='saved' options={{
-                title: 'Saved',
-                headerShown: false,
-                tabBarIcon: ({color, focused}) => (
-                    <Feather name="bookmark" size={24} color={color} />
-                )
-            }}
-            />
+                <Tabs.Screen name='saved' options={{
+                    title: 'Saved',
+                    headerShown: false,
+                    tabBarIcon: ({color, focused}) => (
+                        <Feather name="bookmark" size={24} color={color} />
+                    )
+                }}
+                />
 
-            <Tabs.Screen name='alerts' options={{
-                title: 'Alerts',
-                headerShown: false,
-                tabBarIcon: ({color, focused}) => (
-                    <Feather name="bell" size={24} color={color} />
-                )
-            }}
-            />
+                <Tabs.Screen name='alerts' options={{
+                    title: 'Alerts',
+                    headerShown: false,
+                    tabBarIcon: ({color, focused}) => (
+                        <Feather name="bell" size={24} color={color} />
+                    )
+                }}
+                />
 
-            <Tabs.Screen name='profile' options={{
-                title: 'Profile',
-                headerShown: false,
-                tabBarIcon: ({color, focused}) => (
-                    <Feather name="user" size={24} color={color} />
-                )
-            }}
-            />
-        </Tabs>
-        </>
+                <Tabs.Screen name='profile' options={{
+                    title: 'Profile',
+                    headerShown: false,
+                    tabBarIcon: ({color, focused}) => (
+                        <Feather name="user" size={24} color={color} />
+                    )
+                }}
+                />
+            </Tabs>
+        </ConvexProvider>
     )
 }

@@ -1,17 +1,27 @@
 import { create } from "zustand";
-import { setItems } from '../utils/storage';
+import { setItems, getItems, removeItems } from '../utils/storage';
 
 const useBookmark = create((set, get)=> ({
     bookmarks: [],
     setBookmarks: (bookmarks) => set({bookmarks: bookmarks}),
-    addBookmark: async (bookmark) => {
-        const updatedBookmarks = [...get().bookmarks, bookmark];
+    loadBookmarks: async () => {
+        const storedBookmarks = await getItems("bookmarks");
+        if(storedBookmarks) {
+            set({ bookmarks: JSON.parse(storedBookmarks)});
+        }
+    },
+    isBookmarked: (articleId) => {
+        return get().bookmarks.some((article) => article._id === articleId);
+    },
+    addBookmark: async (article) => {
+        const updatedBookmarks = [...get().bookmarks, article];
         set({ bookmarks: updatedBookmarks });
         await setItems('bookmarks', JSON.stringify(updatedBookmarks));
     },
-    removeBookmark: async (bookmarkId) => {
-        const updatedBookmarks = get().bookmarks.filter((b) => (b.id !== bookmarkId));
+    removeBookmark: async (articleId) => {
+        const updatedBookmarks = get().bookmarks.filter((article) => (article._id !== articleId));
         set({ bookmarks: updatedBookmarks });
+        await removeItems('bookmarks')
         await setItems('bookmarks', JSON.stringify(updatedBookmarks));
     }
 }))

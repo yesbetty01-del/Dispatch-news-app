@@ -27,7 +27,7 @@ const Discover = () => {
             />
             <FlatList
                 data={Categories.splice(1)}
-                keyExtractor={(item) => item.id}
+                keyExtractor={(item) => item._id}
                 numColumns={2}
                 contentContainerStyle={{ paddingTop: spacing.lg, gap: spacing.md }}
                 columnWrapperStyle={{ justifyContent: 'space-between', gap: spacing.md }}

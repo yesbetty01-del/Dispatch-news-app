@@ -9,34 +9,18 @@ import { getItems, setItems } from "../utils/storage";
 
 const ListView = ({ item }) => {
     const { colors, fSize, spacing } = useTheme();
-    const { addBookmark, removeBookmark } = useBookmark();
-    const [ isBookmarked, setIsBookmarked ] = useState(false);
-
-    useEffect(() => {
-        const chechBookmark = async () => {
-            const bookmarks = await getItems("bookmarks");
-            if(bookmarks) {
-                const parsedBookmarks = JSON.parse(bookmarks);
-                const isBookmarked = parsedBookmarks.some(
-                    (articleTitle) => articleTitle === item.title
-                );
-                setIsBookmarked(isBookmarked);
-            }
-            else {
-                setIsBookmarked(false);
-            }
-        };
-        chechBookmark();
-    }, [item]);
+    const { addBookmark, removeBookmark, isBookmarked } = useBookmark();
+    const [ bookmarked, setBookmarked ] = useState(false);
 
     const handleBookmarkPress = () => {
-        if (isBookmarked) {
-            removeBookmark(item);
+        if (isBookmarked(item._id)) {
+            removeBookmark(item._id);
+            setBookmarked(false);
         } else {
             addBookmark(item);
+            setBookmarked(true);
         }
-        setIsBookmarked(!isBookmarked);
-    }
+    };
 
     return (
         <View
@@ -76,7 +60,7 @@ const ListView = ({ item }) => {
                     >
                         {item.title}
                     </Text>
-                    <Ionicons name= { isBookmarked? 'bookmark' : 'bookmark-outline'} size={22} color={ isBookmarked? colors.accentRed : colors.inkSecondary} onPress={handleBookmarkPress} />
+                    <Ionicons name= { isBookmarked(item._id)? 'bookmark' : 'bookmark-outline'} size={22} color={ isBookmarked(item._id)? colors.accentRed : colors.inkSecondary} onPress={handleBookmarkPress} />
                 </View>
                 
                 <View style={styles.footer}>
