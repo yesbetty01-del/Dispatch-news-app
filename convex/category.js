@@ -1,10 +1,8 @@
 export const Categories = [
     {
-        id: 0,
         categoryName: 'All',
     },
     {
-        id: 1,
         categoryName: 'Trending',
         iconName: 'trending-up-outline',
         iconColor: '#FF6B6B',
@@ -12,7 +10,6 @@ export const Categories = [
         articleCount: 120,
     },
     {
-        id: 2,
         categoryName: 'Technology',
         iconName: 'laptop-outline',
         iconColor: '#4ECDC4',
@@ -20,7 +17,6 @@ export const Categories = [
         articleCount: 80,
     },
     {
-        id: 3,
         categoryName: 'Business',
         iconName: 'briefcase-outline',
         iconColor: '#FFD93D',
@@ -28,7 +24,6 @@ export const Categories = [
         articleCount: 60,
     },
     {
-        id: 4,
         categoryName: 'Entertainment',
         iconName: 'film-outline',
         iconColor: '#FF6B6B',
@@ -36,7 +31,6 @@ export const Categories = [
         articleCount: 90,
     },
     {
-        id: 5,
         categoryName: 'Sports',
         iconName: 'football-outline',
         iconColor: '#4ECDC4',
@@ -44,7 +38,6 @@ export const Categories = [
         articleCount: 70,
     },
     {
-        id: 6,
         categoryName: 'Health',
         iconName: 'heart-outline',
         iconColor: '#FFD93D',

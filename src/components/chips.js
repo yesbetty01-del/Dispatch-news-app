@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { StyleSheet, Pressable, Text, ScrollView } from 'react-native';
-import { Categories } from '../data/categories';
+import { Categories } from '../../convex/category';
 import useTheme from '../store/useTheme';
 
 const Chips = () => {

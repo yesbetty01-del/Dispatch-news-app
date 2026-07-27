@@ -14,7 +14,15 @@ const schema = defineSchema({
         categoryName: v.string(),
         imageUrl: v.optional(v.string()),
         time: v.string(),
+    }),
+    category: defineTable({
+        categoryName: v.string(),
+        iconBackground: v.optional(v.string()),
+        iconColor: v.optional(v.string()),
+        articleCount: v.optional(v.number()),
+        iconName: v.optional(v.string())
     })
+    .index("categoryName", ["categoryName"]),
 });
 
 export default schema;
