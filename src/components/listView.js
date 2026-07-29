@@ -5,7 +5,7 @@ import Tag from './tag';
 import Caption from './caption';
 import { Ionicons } from '@expo/vector-icons';
 import useBookmark from '../store/useBookmark';
-import { getItems, setItems } from "../utils/storage";
+import { router } from 'expo-router';
 
 const ListView = ({ item }) => {
     const { colors, fSize, spacing } = useTheme();
@@ -37,9 +37,7 @@ const ListView = ({ item }) => {
             }}
         >
             <Pressable
-                onPress={() => {
-                    Alert.alert('News Article', 'You clicked on the news article');
-                }}
+                onPress={() => router.push(`article/${item._id}`)}
             >
                 <Image
                     source={{uri: item.imageUrl}}

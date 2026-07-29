@@ -8,7 +8,6 @@ import SearchInput from '../../components/searchInput';
 import Chips from '../../components/chips';
 import Card from '../../components/card';
 import ListView from '../../components/listView';
-import DATA from '../../../convex/news';
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 
