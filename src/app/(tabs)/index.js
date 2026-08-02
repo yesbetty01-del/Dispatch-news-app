@@ -17,6 +17,8 @@ const Index = () => {
     const [searchText, setSearchText] = useState('');
     const articles = useQuery(api.articles.getArticles);
 
+    const heroNews = articles?.[0];
+
     const ListHeader = () => {
         return (
             <View style={styles.headerText}>
@@ -48,7 +50,7 @@ const Index = () => {
                         <SearchInput value={searchText} onChangeText={setSearchText} placeHolder={'Search topics, authors, or keywords'} />
                         <View style={{}}>
                             <Chips />
-                            <Card Title={'The Singularity is Nearer'} />
+                            <Card item={heroNews} />
                             <ListHeader />
                         </View>
                     </>

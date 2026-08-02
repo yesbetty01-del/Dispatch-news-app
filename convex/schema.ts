@@ -13,7 +13,7 @@ const schema = defineSchema({
         content: v.string(),
         categoryName: v.string(),
         imageUrl: v.optional(v.string()),
-        time: v.string(),
+        readTime: v.optional(v.number()),
     }),
     category: defineTable({
         categoryName: v.string(),
