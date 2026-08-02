@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { StyleSheet, View, FlatList, Text } from 'react-native';
 import useTheme from '../../store/useTheme';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -16,8 +16,23 @@ const Index = () => {
     const styles = createStyles(colors, spacing, fSize);
     const [searchText, setSearchText] = useState('');
     const articles = useQuery(api.articles.getArticles);
-
+    const categories = useQuery(api.categories.getAllCategories);
+    const [ selectedCategory, setSelectedCategory ] = useState();
+    const [ newCat, setNewCat ] = useState([]);
+    const AllCategories = {
+        _id: "all",
+        categoryName: "All"
+    }
+    const filteredArticles = selectedCategory === "All" ? articles : articles?.filter((article) => article.categoryName === selectedCategory);
     const heroNews = articles?.[0];
+
+    useEffect(() => {
+        if (categories && categories.length > 0) {
+            setSelectedCategory("All");
+            const newCat = [AllCategories, ...categories];
+            setNewCat(newCat);
+        }
+    }, [categories]);
 
     const ListHeader = () => {
         return (
@@ -28,7 +43,7 @@ const Index = () => {
         )
     }
 
-    if(!articles) {
+    if(!articles || !categories) {
         return(
             <SafeAreaView style={styles.container} edge={["top", "left", "right"]} >
                 <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
@@ -43,13 +58,13 @@ const Index = () => {
             <Greeting />
             <Header header={'Dispatch'} />
             <FlatList
-                data={articles}
+                data={filteredArticles}
                 keyExtractor={(item) => item._id}
                 ListHeaderComponent={
                     <>
                         <SearchInput value={searchText} onChangeText={setSearchText} placeHolder={'Search topics, authors, or keywords'} />
                         <View style={{}}>
-                            <Chips />
+                            <Chips categories={newCat} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
                             <Card item={heroNews} />
                             <ListHeader />
                         </View>

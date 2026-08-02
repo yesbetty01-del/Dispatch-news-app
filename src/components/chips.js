@@ -3,10 +3,9 @@ import { StyleSheet, Pressable, Text, ScrollView } from 'react-native';
 import { Categories } from '../../convex/category';
 import useTheme from '../store/useTheme';
 
-const Chips = () => {
+const Chips = ({ categories, selectedCategory, setSelectedCategory }) => {
     const { colors, spacing } = useTheme();
-    const [selectedCategory, setSelectedCategory] = useState( Categories[0].categoryName );
-
+    
     return (
         <ScrollView
             horizontal
@@ -22,9 +21,9 @@ const Chips = () => {
                 gap: spacing.sm
             }}
         >
-            {Categories.map((category, index) => (
+            {categories.map((category) => (
                 <Pressable
-                    key={index}
+                    key={category._id}
                     onPress={() => setSelectedCategory(category.categoryName)}
                     style={[
                         styles.chip,

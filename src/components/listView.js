@@ -6,6 +6,7 @@ import Caption from './caption';
 import { Ionicons } from '@expo/vector-icons';
 import useBookmark from '../store/useBookmark';
 import { router } from 'expo-router';
+import { ago } from "../utils/ago";
 
 const ListView = ({ item }) => {
     const { colors, fSize, spacing } = useTheme();
@@ -64,7 +65,7 @@ const ListView = ({ item }) => {
                 <View style={styles.footer}>
                     <Tag categoryName={item.categoryName} color={colors.inkSecondary} />
                     <View style={{width: 3, height: 3, borderRadius: 1.5, backgroundColor: 'gray'}} />
-                    <Caption time={item.time} />                    
+                    <Caption time={ago(item._creationTime)} />                   
                 </View>
             </View>
         </View>
