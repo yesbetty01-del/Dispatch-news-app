@@ -14,7 +14,9 @@ const schema = defineSchema({
         categoryName: v.string(),
         imageUrl: v.optional(v.string()),
         readTime: v.optional(v.number()),
-    }),
+    })
+    .index("by_categoryName", ["categoryName"]),
+
     category: defineTable({
         categoryName: v.string(),
         iconBackground: v.optional(v.string()),
@@ -22,7 +24,7 @@ const schema = defineSchema({
         articleCount: v.optional(v.number()),
         iconName: v.optional(v.string())
     })
-    .index("categoryName", ["categoryName"]),
+    .index("categoryNameIndex", ["categoryName"]),
 });
 
 export default schema;

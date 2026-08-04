@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, View, Text, FlatList, Pressable, Alert, Dimensions } from 'react-native';
+import { StyleSheet, View, Text, FlatList, Pressable, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useTheme from '../../store/useTheme';
 import Header from '../../components/header';
@@ -7,6 +7,7 @@ import SearchInput from '../../components/searchInput';
 import CategoryCard from '../../components/categoryCard';
 import { api } from "../../../convex/_generated/api";
 import { useQuery } from 'convex/react';
+import { router } from 'expo-router';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -48,7 +49,7 @@ const Discover = () => {
                 showsVerticalScrollIndicator={false}
                 renderItem={({ item }) => (
                     <Pressable
-                        onPress={() => Alert.alert(`You selected ${item.categoryName}`)}
+                        onPress={() => router.push(`/categories/${item.categoryName}`)}
                         style={{
                             backgroundColor: colors.containerLowest,
                             paddingVertical: spacing.xl,
